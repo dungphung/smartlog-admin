@@ -3,15 +3,31 @@ import { useState } from 'react'
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Tên bài viết',
     dataIndex: 'name',
   },
   {
-    title: 'Age',
+    title: 'Tìm kiếm đối tác',
     dataIndex: 'age',
   },
   {
-    title: 'Address',
+    title: 'Mặt hàng/ Dịch vụ',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Loại hình',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Người tạo',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Thời gian tạo',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Lần chỉnh sửa cuối cùng',
     dataIndex: 'address',
   },
 ]
@@ -26,20 +42,24 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-const ListPartner = () => {
+const ListRequest = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   return (
     <div>
-      <Table
-        rowSelection={{
-          selectedRowKeys,
-          onChange: (selectedRowKeys) => setSelectedRowKeys(selectedRowKeys),
-        }}
-        columns={columns}
-        dataSource={data}
-      />
+      <p className="heading-6">Danh sách yêu cầu</p>
+
+      <div className="customContent mt16">
+        <Table
+          rowSelection={{
+            selectedRowKeys,
+            onChange: (selectedRowKeys) => setSelectedRowKeys(selectedRowKeys),
+          }}
+          columns={columns}
+          dataSource={data}
+        />
+      </div>
     </div>
   )
 }
 
-export default ListPartner
+export default ListRequest

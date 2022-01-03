@@ -9,12 +9,14 @@ import {
   Row,
   Space,
   Table,
+  Button,
 } from 'antd'
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Mục tiêu người dùng',
     dataIndex: 'name',
+    width: '80%',
   },
 
   {
@@ -41,39 +43,21 @@ for (let i = 1; i <= 10; i++) {
   })
 }
 
-const expandable = {
-  expandedRowRender: (record) => <p>{record.description}</p>,
-}
-const title = () => 'Here is title'
-const showHeader = true
-const footer = () => 'Here is footer'
-
 const Content = () => {
   const [form] = Form.useForm()
 
   const expandedRowRender = () => {
     const columns = [
-      { title: 'Date', dataIndex: 'date', key: 'date' },
-      { title: 'Name', dataIndex: 'name', key: 'name' },
-      {
-        title: 'Status',
-        key: 'state',
-        render: () => (
-          <span>
-            <Badge status="success" />
-            Finished
-          </span>
-        ),
-      },
-      { title: 'Upgrade Status', dataIndex: 'upgradeNum', key: 'upgradeNum' },
+      { title: 'Tag', dataIndex: 'date', key: 'date' },
+      { title: 'Link', dataIndex: 'name', key: 'name' },
       {
         title: 'Action',
-        dataIndex: 'operation',
-        key: 'operation',
+        key: 'action',
+
         render: () => (
           <Space size="middle">
-            <a>Pause</a>
-            <a>Stop</a>
+            <EditOutlined />
+            <DeleteOutlined />
           </Space>
         ),
       },
@@ -88,7 +72,14 @@ const Content = () => {
         upgradeNum: 'Upgraded: 56',
       })
     }
-    return <Table columns={columns} dataSource={data} pagination={false} />
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+        rowSelection={{}}
+      />
+    )
   }
 
   const tableColumns = columns.map((item) => ({ ...item, ellipsis: true }))
@@ -130,12 +121,15 @@ const Content = () => {
             </Form.Item>
           </Col>
         </Row>
+        <Space>
+          <Button className="button-1 redButton">Thêm</Button>
+          <Button className="button-1">Hủy</Button>
+        </Space>
         <Divider />
         <p className="sub-title-2">Danh sách mục tiêu người dùng</p>
 
         <Table
-          className="components-table-demo-nested"
-          bordered
+          className="components-table-demo-nested mt32"
           columns={tableColumns}
           dataSource={data}
           expandable={{

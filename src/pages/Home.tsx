@@ -1,5 +1,5 @@
-import { Breadcrumb, Typography, Tabs } from 'antd'
-import { Content } from 'antd/lib/layout/layout'
+import { Tabs } from 'antd'
+
 import MainLayout from 'src/components/MainLayout'
 
 import HomeContentTab from 'src/container/Home/Content'

@@ -39,11 +39,11 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-const ListPartner = () => {
+const ListComments = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   return (
     <div>
-      <p className="heading-6">Danh sách đối tác</p>
+      <p className="heading-6">Danh sách bình luận</p>
       <div className="mt16">
         <Space>
           <UploadOutlined style={{ color: '#0b4582' }} />
@@ -69,4 +69,4 @@ const ListPartner = () => {
   )
 }
 
-export default ListPartner
+export default ListComments
