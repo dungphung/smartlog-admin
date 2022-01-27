@@ -15,146 +15,140 @@ const { SubMenu } = Menu
 
 const navigation = [
   {
-    key: 'common',
-    title: 'TỔNG QUAN',
+    key: 'users',
+    title: 'Quản lý Tài khoản',
     children: [
       {
-        key: 'dashboard',
-        title: 'Bảng điều khiển',
-        href: '/dashboard',
+        key: 'users-list',
+        title: 'Danh sách',
+        href: '/users/list',
       },
       {
-        key: 'analysis',
-        title: 'Phân tích',
-        href: '/analysis',
+        key: 'users-add',
+        title: 'Thêm mới',
+        href: '/users/add',
+      },
+      {
+        key: 'users-view',
+        title: 'Xem',
+        href: '/users/view',
+      },
+      {
+        key: 'users-edit',
+        title: 'Chỉnh sửa',
+        href: '/users/edit',
+      },
+    ],
+  },
+  // {
+  //   key: 'home',
+  //   title: 'Trang chủ',
+  //   href: '/home',
+  // },
+  // {
+  //   key: 'intro',
+  //   title: 'Giới thiệu',
+  //   href: '/intro',
+  // },
+  {
+    key: 'partners',
+    title: 'Tìm đối tác',
+    icon: '/svgs/group-user-icon.svg',
+    children: [
+      {
+        href: `/partners?tab=${PARTNERS_TABS.LIST_PARTNER}`,
+        title: 'Danh sách đối tác',
+        key: PARTNERS_TABS.LIST_PARTNER,
+      },
+      {
+        href: `/partners?tab=${PARTNERS_TABS.LIST_REQUEST}`,
+        title: 'Danh sách yêu cầu',
+        key: PARTNERS_TABS.LIST_REQUEST,
+      },
+      {
+        href: `/partners?tab=${PARTNERS_TABS.LIST_COMMENT}`,
+        title: 'Danh sách bình luận',
+        key: PARTNERS_TABS.LIST_COMMENT,
+      },
+      {
+        href: `/partners?tab=${PARTNERS_TABS.PARTNERS_EDIT}`,
+        title: 'Chỉnh sửa',
+        key: PARTNERS_TABS.PARTNERS_EDIT,
       },
     ],
   },
   {
-    key: 'manager',
-    title: 'QUẢN LÝ',
+    key: 'lookup',
+    title: 'Tra cứu',
     children: [
       {
-        key: 'users',
-        title: 'Người dùng',
-        children: [
-          {
-            key: 'users-list',
-            title: 'Danh sách',
-            href: '/users/list',
-          },
-          {
-            key: 'users-add',
-            title: 'Thêm mới',
-            href: '/users/add',
-          },
-          {
-            key: 'users-view',
-            title: 'Xem',
-            href: '/users/view',
-          },
-          {
-            key: 'users-edit',
-            title: 'Chỉnh sửa',
-            href: '/users/edit',
-          },
-        ],
+        href: `/lookup/${LOOKUP_NAVIGATION.SHIPPING_INFORMATION}`,
+        title: 'Thông tin vận chuyển',
+        key: LOOKUP_NAVIGATION.SHIPPING_INFORMATION,
       },
       {
-        key: 'home',
-        title: 'Trang chủ',
-        href: '/home',
+        href: `/lookup/${LOOKUP_NAVIGATION.PORT_INFORMATION}`,
+        title: 'Thông tin Cảng',
+        key: LOOKUP_NAVIGATION.PORT_INFORMATION,
       },
       {
-        key: 'intro',
-        title: 'Giới thiệu',
-        href: '/intro',
+        href: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
+        title: 'Luật',
+        key: LOOKUP_NAVIGATION.RULES,
       },
       {
-        key: 'partners',
-        title: 'Tìm đối tác',
-        icon: '/svgs/group-user-icon.svg',
-        children: [
-          {
-            href: `/partners?tab=${PARTNERS_TABS.LIST_PARTNER}`,
-            title: 'Danh sách đối tác',
-            key: PARTNERS_TABS.LIST_PARTNER,
-          },
-          {
-            href: `/partners?tab=${PARTNERS_TABS.LIST_REQUEST}`,
-            title: 'Danh sách yêu cầu',
-            key: PARTNERS_TABS.LIST_REQUEST,
-          },
-          {
-            href: `/partners?tab=${PARTNERS_TABS.LIST_COMMENT}`,
-            title: 'Danh sách bình luận',
-            key: PARTNERS_TABS.LIST_COMMENT,
-          },
-          {
-            href: `/partners?tab=${PARTNERS_TABS.PARTNERS_EDIT}`,
-            title: 'Chỉnh sửa',
-            key: PARTNERS_TABS.PARTNERS_EDIT,
-          },
-        ],
-      },
-      {
-        key: 'lookup',
-        title: 'Tra cứu',
-        children: [
-          {
-            href: `/lookup/${LOOKUP_NAVIGATION.SHIPPING_INFORMATION}`,
-            title: 'Thông tin vận chuyển',
-            key: LOOKUP_NAVIGATION.SHIPPING_INFORMATION,
-          },
-          {
-            href: `/lookup/${LOOKUP_NAVIGATION.PORT_INFORMATION}`,
-            title: 'Thông tin Cảng',
-            key: LOOKUP_NAVIGATION.PORT_INFORMATION,
-          },
-          {
-            href: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
-            title: 'Luật',
-            key: LOOKUP_NAVIGATION.RULES,
-          },
-          {
-            href: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
-            title: 'Các liên kết hữu ích',
-            key: LOOKUP_NAVIGATION.USEFUL_LINKS,
-          },
-        ],
-      },
-      {
-        key: 'forum',
-        title: 'Diễn đàn',
-        href: '/forum',
-      },
-      {
-        key: 'news',
-        title: 'Tin tức',
-        href: '/news',
-      },
-      {
-        key: 'contact',
-        title: 'Liên hệ',
-        href: '/contact',
+        href: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
+        title: 'Các liên kết hữu ích',
+        key: LOOKUP_NAVIGATION.USEFUL_LINKS,
       },
     ],
+  },
+
+  {
+    key: 'forum',
+    title: 'Diễn đàn',
+    href: '/forum',
+  },
+  {
+    key: 'notification',
+    title: 'Thông cáo',
+    children: [
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.SHIPPING_INFORMATION}`,
+        title: 'Thông tin vận chuyển',
+        key: LOOKUP_NAVIGATION.SHIPPING_INFORMATION,
+      },
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.PORT_INFORMATION}`,
+        title: 'Thông tin Cảng',
+        key: LOOKUP_NAVIGATION.PORT_INFORMATION,
+      },
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
+        title: 'Luật',
+        key: LOOKUP_NAVIGATION.RULES,
+      },
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
+        title: 'Các liên kết hữu ích',
+        key: LOOKUP_NAVIGATION.USEFUL_LINKS,
+      },
+    ],
+  },
+  {
+    key: 'contact',
+    title: 'Liên hệ',
+    href: '/news',
+  },
+  {
+    key: 'email',
+    title: 'Email',
+    href: '/news',
   },
   {
     key: 'setting',
-    title: 'CÀI ĐẶT',
-    children: [
-      {
-        key: 'permission',
-        title: 'Phân quyền',
-        href: '/permission',
-      },
-      {
-        key: 'email',
-        title: 'Email',
-        href: '/email',
-      },
-    ],
+    title: 'Cài đặt',
+    href: '/contact',
   },
 ]
 
@@ -172,48 +166,40 @@ const MainLayout: React.FC = ({ children }) => {
           <Image style={{ paddingLeft: 30 }} src="/svgs/Logo.svg" />
         </div>
         <Divider />
-        {navigation.map((item) => {
-          return (
-            <div key={item.key}>
-              <p className="text-body-2 ml16">{item.title}</p>
-              <Menu mode="inline">
-                {item.children.map((child) => {
-                  if (child.children) {
-                    return (
-                      <SubMenu
-                        key={child.key}
-                        icon={<UserOutlined />}
-                        title={child.title}
-                      >
-                        {child.children.map((subChild) => {
-                          return (
-                            <Menu.Item
-                              key={subChild.key}
-                              onClick={() => navigate(subChild.href)}
-                            >
-                              {subChild.title}
-                            </Menu.Item>
-                          )
-                        })}
-                      </SubMenu>
-                    )
-                  }
+        <Menu mode="inline">
+          {navigation.map((item) => {
+            if (!item.children) {
+              return (
+                <Menu.Item
+                  key={item.key}
+                  icon={<Icon component={GroupUserIcon} />}
+                  onClick={() => navigate(item.href)}
+                >
+                  {item.title}
+                </Menu.Item>
+              )
+            }
 
+            return (
+              <SubMenu
+                key={item.key}
+                icon={<UserOutlined />}
+                title={item.title}
+              >
+                {item.children?.map((child) => {
                   return (
                     <Menu.Item
                       key={child.key}
-                      icon={<Icon component={GroupUserIcon} />}
                       onClick={() => navigate(child.href)}
                     >
                       {child.title}
                     </Menu.Item>
                   )
                 })}
-              </Menu>
-              <Divider />
-            </div>
-          )
-        })}
+              </SubMenu>
+            )
+          })}
+        </Menu>
       </Sider>
       <Layout className="site-layout" style={{ background: '#FAFAFA' }}>
         <Header

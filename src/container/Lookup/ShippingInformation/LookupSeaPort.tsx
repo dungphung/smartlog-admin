@@ -11,7 +11,7 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-const LookupAirline = () => {
+const LookupPort = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const columns = [
@@ -44,4 +44,4 @@ const LookupAirline = () => {
   )
 }
 
-export default LookupAirline
+export default LookupPort

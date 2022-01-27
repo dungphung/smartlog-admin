@@ -111,7 +111,7 @@ const ListRequest = () => {
 
   return (
     <div>
-      <p className="heading-6">Người dùng</p>
+      <p className="heading-6">Quản lý Admin</p>
 
       <div className="mt16">
         <Space>

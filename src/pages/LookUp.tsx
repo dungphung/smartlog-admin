@@ -1,26 +1,23 @@
 import { Tabs } from 'antd'
+import { useParams, useMatch, useLocation } from 'react-router-dom'
 
 import MainLayout from 'src/components/MainLayout'
 
 import AboutPartner from 'src/container/Intro/AboutPartner'
 import AboutUs from 'src/container/Intro/AboutUs'
+import MainContent from 'src/container/Lookup/ShippingInformation/MainContent'
 
 const { TabPane } = Tabs
 
 const Lookup = () => {
+  const params = useParams()
+  const location = useLocation()
+
+  console.log(location)
+
   return (
     <MainLayout>
-      <p className="heading-6">Danh sách đối tác</p>
-      <div className="customContent">
-        <Tabs defaultActiveKey="1" onChange={() => {}}>
-          <TabPane tab="Về chúng tôi" key="1">
-            <AboutUs />
-          </TabPane>
-          <TabPane tab="Về đối tác" key="2">
-            <AboutPartner />
-          </TabPane>
-        </Tabs>
-      </div>
+      {location.pathname.includes('shipping-information') && <MainContent />}
     </MainLayout>
   )
 }
