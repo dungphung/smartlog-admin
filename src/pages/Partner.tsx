@@ -13,22 +13,26 @@ import {
   withDefault,
 } from 'use-query-params'
 import { TABS as PARTNER_TABS } from 'src/constants/partners'
+import { useLocation } from 'react-router-dom'
 
 const { TabPane } = Tabs
 
-const HomePage = () => {
+const PartnersPage = () => {
+  const { pathname } = useLocation()
   const [{ tab }, setQuery] = useQueryParams({
     tab: withDefault(StringParam, PARTNER_TABS.LIST_PARTNER),
   })
 
   return (
     <MainLayout>
-      {tab === PARTNER_TABS.LIST_PARTNER && <ListPartner />}
+      {pathname.includes('list') && <ListPartner />}
+      {pathname.includes('request') && <ListRequest />}
+      {/* {tab === PARTNER_TABS.LIST_PARTNER && <ListPartner />}
       {tab === PARTNER_TABS.LIST_REQUEST && <ListRequest />}
       {tab === PARTNER_TABS.LIST_COMMENT && <ListComments />}
-      {tab === PARTNER_TABS.PARTNERS_EDIT && <EditRequest />}
+      {tab === PARTNER_TABS.PARTNERS_EDIT && <EditRequest />} */}
     </MainLayout>
   )
 }
 
-export default HomePage
+export default PartnersPage

@@ -166,10 +166,9 @@ const ListRequest = () => {
 
           <Col xs={6}>
             <Select
-              defaultValue="lucy"
               style={{ width: '100%' }}
               onChange={(e) => {
-                setParams({ order: e })
+                setParams({ order: `${e}` })
               }}
             >
               <Select.Option value="1">Mới nhất</Select.Option>

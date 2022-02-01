@@ -37,24 +37,14 @@ const navigation = [
     icon: '/svgs/group-user-icon.svg',
     children: [
       {
-        href: `/partners?tab=${PARTNERS_TABS.LIST_PARTNER}`,
+        href: `/partners/${PARTNERS_TABS.LIST_PARTNER}`,
         title: 'Danh sách đối tác',
         key: PARTNERS_TABS.LIST_PARTNER,
       },
       {
-        href: `/partners?tab=${PARTNERS_TABS.LIST_REQUEST}`,
+        href: `/partners/${PARTNERS_TABS.LIST_REQUEST}`,
         title: 'Danh sách yêu cầu',
         key: PARTNERS_TABS.LIST_REQUEST,
-      },
-      {
-        href: `/partners?tab=${PARTNERS_TABS.LIST_COMMENT}`,
-        title: 'Danh sách bình luận',
-        key: PARTNERS_TABS.LIST_COMMENT,
-      },
-      {
-        href: `/partners?tab=${PARTNERS_TABS.PARTNERS_EDIT}`,
-        title: 'Chỉnh sửa',
-        key: PARTNERS_TABS.PARTNERS_EDIT,
       },
     ],
   },
