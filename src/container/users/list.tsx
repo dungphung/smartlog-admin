@@ -178,6 +178,7 @@ const ListRequest = () => {
         </Row>
 
         <Table
+          scroll={{ x: 1600 }}
           className="mt32"
           rowSelection={{
             selectedRowKeys,

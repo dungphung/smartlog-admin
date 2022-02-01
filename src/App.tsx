@@ -22,7 +22,7 @@ import ForumsPage from './pages/Forums'
 import ForgetPasswordPage from './pages/ForgetPassword'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
-
+import NotificationPage from './pages/NotificationPage'
 const RouteAdapter = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -57,7 +57,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget-password" element={<ForgetPasswordPage />} />
-
+          <Route path="/notification/*" element={<NotificationPage />} />
           <Route path="/partners/*" element={<PartnersPage />} />
           <Route path="/intro" element={<IntroPage />} />
           <Route path="/home" element={<HomePage />} />
