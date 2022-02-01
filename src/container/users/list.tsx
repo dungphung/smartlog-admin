@@ -4,9 +4,16 @@ import {
   SearchOutlined,
   UploadOutlined,
 } from '@ant-design/icons'
-import { Row, Space, Table, Tabs, Col, Input, Select } from 'antd'
-import { useMemo, useState } from 'react'
-import EditStatusDrawer from './EditStatusDrawer'
+import { Row, Space, Table, Tabs, Col, Input, Select, Form, Button } from 'antd'
+import { useMemo, useState, useCallback } from 'react'
+import {
+  NumberParam,
+  StringParam,
+  useQueryParams,
+  withDefault,
+} from 'use-query-params'
+import EditUserPermission from './EditPermissionDrawer'
+import styles from './list.module.less'
 
 const STATUS_INFO = {
   '0': {
@@ -46,8 +53,16 @@ for (let i = 0; i < 46; i++) {
 }
 
 const ListRequest = () => {
+  const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
+    pageSize: withDefault(NumberParam, 10),
+    pageIndex: withDefault(NumberParam, 1),
+    order: withDefault(StringParam, ''),
+    keyword: withDefault(StringParam, ''),
+  })
+  const [form] = Form.useForm()
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
-  const [isVisibleModalEditStatus, setIsVisibleModalEditStatus] =
+
+  const [visibleModalEditUserPermission, setVisibleModalEditUserPermission] =
     useState(false)
 
   const columns = useMemo(
@@ -58,7 +73,9 @@ const ListRequest = () => {
 
         render: () => (
           <a>
-            <EditOutlined />
+            <EditOutlined
+              onClick={() => setVisibleModalEditUserPermission(true)}
+            />
           </a>
         ),
       },
@@ -74,7 +91,6 @@ const ListRequest = () => {
         render: (status, row) => {
           return (
             <div
-              onClick={() => setIsVisibleModalEditStatus(true)}
               className="text-body-2 cursor"
               style={{
                 background: STATUS_INFO[status].color,
@@ -98,6 +114,10 @@ const ListRequest = () => {
         dataIndex: 'phone',
       },
       {
+        title: 'Ngày truy cập gần nhất',
+        dataIndex: 'date',
+      },
+      {
         title: 'Ngày đăng ký',
         dataIndex: 'date',
       },
@@ -109,15 +129,22 @@ const ListRequest = () => {
     [],
   )
 
+  const onFinish = useCallback((values) => {}, [])
+
   return (
-    <div>
-      <p className="heading-6">Người dùng</p>
+    <div className={styles.container}>
+      <Row gutter={24} justify="space-between">
+        <Col xs={24} lg={12}>
+          <p className="heading-6">Người dùng</p>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Row justify="end">
+            <Button className="redButton">Chỉnh sửa</Button>
+          </Row>
+        </Col>
+      </Row>
 
       <div className="mt16">
-        <Space>
-          <UploadOutlined style={{ color: '#0b4582' }} />
-          <p className="button-2">IMPORT</p>
-        </Space>
         <Space className="ml16">
           <DownloadOutlined style={{ color: '#0b4582' }} />
           <p className="button-2">Export</p>
@@ -129,6 +156,11 @@ const ListRequest = () => {
             <Input
               prefix={<SearchOutlined />}
               placeholder="Tìm kiếm khách hàng"
+              defaultValue={keyword}
+              value={keyword}
+              onChange={(e) => {
+                setParams({ keyword: e.target.value })
+              }}
             />
           </Col>
 
@@ -136,17 +168,16 @@ const ListRequest = () => {
             <Select
               defaultValue="lucy"
               style={{ width: '100%' }}
-              onChange={() => {}}
+              onChange={(e) => {
+                setParams({ order: e })
+              }}
             >
-              <Select.Option value="jack">Jack</Select.Option>
-              <Select.Option value="lucy">Lucy</Select.Option>
-              <Select.Option value="disabled" disabled>
-                Disabled
-              </Select.Option>
-              <Select.Option value="Yiminghe">yiminghe</Select.Option>
+              <Select.Option value="1">Mới nhất</Select.Option>
+              <Select.Option value="2">Cũ nhất</Select.Option>
             </Select>
           </Col>
         </Row>
+
         <Table
           className="mt32"
           rowSelection={{
@@ -155,11 +186,18 @@ const ListRequest = () => {
           }}
           columns={columns}
           dataSource={data}
+          pagination={{
+            pageSize,
+            current: pageIndex,
+            total: 85,
+            showSizeChanger: true,
+            showQuickJumper: true,
+          }}
         />
       </div>
-      <EditStatusDrawer
-        visible={isVisibleModalEditStatus}
-        onClose={() => setIsVisibleModalEditStatus(false)}
+      <EditUserPermission
+        visible={visibleModalEditUserPermission}
+        onClose={() => setVisibleModalEditUserPermission(false)}
       />
     </div>
   )

@@ -48,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
+
           <Route path="users/*" element={<UsersPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/lookup/*" element={<LookupPage />} />

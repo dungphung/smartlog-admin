@@ -1,4 +1,4 @@
-import { Avatar, Divider, Image, Layout, Menu, Row, Space } from 'antd'
+import { Avatar, Badge, Divider, Image, Layout, Menu, Row, Space } from 'antd'
 import { useState } from 'react'
 import Icon, {
   NotificationOutlined,
@@ -19,37 +19,18 @@ const navigation = [
     title: 'Quản lý Tài khoản',
     children: [
       {
-        key: 'users-list',
-        title: 'Danh sách',
-        href: '/users/list',
+        key: 'users-manager',
+        title: 'Quản lý Người dùng',
+        href: '/users/manager',
       },
       {
-        key: 'users-add',
-        title: 'Thêm mới',
-        href: '/users/add',
-      },
-      {
-        key: 'users-view',
-        title: 'Xem',
-        href: '/users/view',
-      },
-      {
-        key: 'users-edit',
-        title: 'Chỉnh sửa',
-        href: '/users/edit',
+        key: 'users-notification',
+        title: 'Nhận tin tức và sự kiện',
+        href: '/users/notification',
       },
     ],
   },
-  // {
-  //   key: 'home',
-  //   title: 'Trang chủ',
-  //   href: '/home',
-  // },
-  // {
-  //   key: 'intro',
-  //   title: 'Giới thiệu',
-  //   href: '/intro',
-  // },
+
   {
     key: 'partners',
     title: 'Tìm đối tác',
@@ -213,7 +194,10 @@ const MainLayout: React.FC = ({ children }) => {
           <Row justify="end">
             <Space>
               <SearchOutlined />
-              <NotificationOutlined />
+              <Badge dot>
+                <NotificationOutlined />
+              </Badge>
+
               <Avatar
                 style={{ backgroundColor: '#87d068' }}
                 icon={<UserOutlined />}
