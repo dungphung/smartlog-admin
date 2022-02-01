@@ -23,6 +23,7 @@ import ForgetPasswordPage from './pages/ForgetPassword'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import NotificationPage from './pages/NotificationPage'
+import Settings from './pages/Settings'
 const RouteAdapter = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -54,6 +55,7 @@ function App() {
           <Route path="/lookup/*" element={<LookupPage />} />
           <Route path="/forum" element={<ForumsPage />} />
 
+          <Route path="/setting/*" element={<Settings />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget-password" element={<ForgetPasswordPage />} />

@@ -1,23 +1,13 @@
 import { Col, Menu, Row } from 'antd'
-import React from 'react'
-
+import { useNavigate, useRoutes, useMatch, useLocation } from 'react-router-dom'
+import MainLayout from 'src/components/MainLayout'
+import ContactContainer from 'src/container/Setting/Contact'
 const Settings = () => {
+  const { pathname } = useLocation()
   return (
-    <div>
-      <p>Thông tin tài khoản</p>
-      <Row gutter={24}>
-        <Col xs={8}>
-          <Menu>
-            <Menu.Item>Thông tin tài khoản</Menu.Item>
-            <Menu.Item>Thay đổi mật khẩu</Menu.Item>
-            <Menu.Item>Thông báo</Menu.Item>
-            <Menu.Item>Cài đặt</Menu.Item>
-          </Menu>
-        </Col>
-
-        <Col xs={16}></Col>
-      </Row>
-    </div>
+    <MainLayout>
+      {pathname.includes('contact') && <ContactContainer />}
+    </MainLayout>
   )
 }
 
