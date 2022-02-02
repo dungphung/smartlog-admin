@@ -5,7 +5,7 @@ import {
   SearchOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Space, Table, Row, Select, Input, Col, Typography } from 'antd'
+import { Space, Table, Row, Select, Input, Col, Typography, Tag } from 'antd'
 import { useState } from 'react'
 import {
   NumberParam,
@@ -14,27 +14,21 @@ import {
   withDefault,
 } from 'use-query-params'
 import styles from './ListPartner.module.less'
-import EditPartnerInfoDrawer from './EditPartnerInfoDrawer'
+import EditCoopDrawer from './EditCoopDrawer'
+
 const STATUS_INFO = {
   '0': {
-    title: 'Active',
+    title: 'Xác nhận',
     color: '#00703C',
   },
   '1': {
-    title: 'Passive',
+    title: 'Chưa xác nhận',
     color: '#9DDAF4',
   },
+
   '2': {
-    title: 'Reopen',
-    color: '#FFB800',
-  },
-  '3': {
-    title: 'Block',
+    title: 'Ẩn',
     color: '#D4351C',
-  },
-  '4': {
-    title: 'Xóa',
-    color: '#DBDBDB',
   },
 }
 
@@ -45,7 +39,7 @@ for (let i = 0; i < 46; i++) {
     name: `Công ty Cổ phần Giải pháp Chuỗi cung ứng Smartlog ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`,
-    status: Math.floor(Math.random() * 5),
+    status: Math.floor(Math.random() * 2),
     email: 'quyen.thai@example.com',
     field: 'Công nghệ thông tin',
     mainServices: 'Vườn ươm và sản xuất hoa, Trồng nấm và rau',
@@ -74,20 +68,14 @@ const ListPartner = () => {
     {
       title: 'Trạng thái',
       dataIndex: 'status',
-      width: '7%',
+      width: '10%',
+      textAlign: 'center',
       render: (status, row) => {
         return (
-          <div
-            className="text-body-2 cursor"
-            style={{
-              background: STATUS_INFO[status].color,
-              color: 'white',
-              borderRadius: 2,
-              textAlign: 'center',
-              textDecoration: status === 4 ? 'line-through' : 'normal',
-            }}
-          >
-            {STATUS_INFO[status].title}
+          <div>
+            <Tag color={STATUS_INFO[status].color}>
+              {STATUS_INFO[status].title}
+            </Tag>
           </div>
         )
       },
@@ -149,7 +137,7 @@ const ListPartner = () => {
   ]
   return (
     <div className={styles.container}>
-      <p className="heading-6">Danh sách đối tác</p>
+      <p className="heading-6">Cơ hội hợp tác</p>
 
       <div className="customContent mt16">
         <Row gutter={24} justify="space-between">
@@ -197,7 +185,7 @@ const ListPartner = () => {
         />
       </div>
 
-      <EditPartnerInfoDrawer
+      <EditCoopDrawer
         visible={visibleModalStatusPartner}
         onClose={() => {
           setVisibleModalStatusPartner(false)

@@ -91,7 +91,6 @@ const UserRegisterNews = ({
       </Row>
 
       <Table
-        scroll={{ x: 1600 }}
         className="mt32"
         rowSelection={{
           selectedRowKeys,

@@ -13,6 +13,7 @@ import {
   withDefault,
 } from 'use-query-params'
 import EditUserPermission from './EditPermissionDrawer'
+import EditSearchUserPermissionDrawer from './EditSearchUserPermissionDrawer'
 import styles from './list.module.less'
 
 const STATUS_INFO = {
@@ -64,6 +65,8 @@ const ListRequest = () => {
 
   const [visibleModalEditUserPermission, setVisibleModalEditUserPermission] =
     useState(false)
+
+  const [visibleSearchDrawer, setVisibleSearchDrawer] = useState(false)
 
   const columns = useMemo(
     () => [
@@ -139,7 +142,12 @@ const ListRequest = () => {
         </Col>
         <Col xs={24} lg={12}>
           <Row justify="end">
-            <Button className="redButton">Chỉnh sửa</Button>
+            <Button
+              onClick={() => setVisibleSearchDrawer(true)}
+              className="redButton"
+            >
+              Chỉnh sửa
+            </Button>
           </Row>
         </Col>
       </Row>
@@ -198,6 +206,10 @@ const ListRequest = () => {
       <EditUserPermission
         visible={visibleModalEditUserPermission}
         onClose={() => setVisibleModalEditUserPermission(false)}
+      />
+      <EditSearchUserPermissionDrawer
+        visible={visibleSearchDrawer}
+        onClose={() => setVisibleSearchDrawer(false)}
       />
     </div>
   )

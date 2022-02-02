@@ -5,7 +5,7 @@ import {
   SearchOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Space, Table, Row, Select, Input, Col, Typography } from 'antd'
+import { Space, Table, Row, Select, Input, Col, Typography, Button } from 'antd'
 import { useState } from 'react'
 import {
   NumberParam,
@@ -78,7 +78,11 @@ const NotificationDraft = () => {
   ]
   return (
     <div className={styles.container}>
-      <p className="heading-6">Danh sách Thông cáo truyền thông lưu nháp</p>
+      <Row justify="space-between">
+        <p className="heading-6">Danh sách Thông cáo truyền thông lưu nháp</p>
+
+        <Button className="redButton button-1">Đăng công khai</Button>
+      </Row>
 
       <div className="customContent mt16">
         <Row gutter={24} justify="space-between">

@@ -1,35 +1,25 @@
-import { Drawer, Space, Button, Row, Form, Select } from 'antd'
-
-const DetailPartnerInfo = () => {
-  return (
-    <div>
-      <p className="sub-title-2 font-normal">
-        <span className="sub-title-2">Tên công ty:</span>Công ty Cổ phần Giải
-        pháp Chuỗi cung ứng Smartlog
-      </p>
-      <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Ngành kinh doanh:</span>Công nghệ thông
-        tin
-      </p>
-      <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Mặt hàng/ Dịch vụ chủ lực:</span>Giải pháp
-        Chuỗi cung ứng
-      </p>
-      <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Số đăng ký Doanh nghiệp:</span>
-        0316955888 Smartlog
-      </p>
-    </div>
-  )
-}
-
-const FormSelectUser = () => {}
+import {
+  Drawer,
+  Space,
+  Button,
+  Row,
+  Form,
+  Select,
+  Radio,
+  DatePicker,
+  Modal,
+} from 'antd'
+import { useState } from 'react'
 
 const EditPartnerInfoDrawer = ({ visible, onClose }) => {
+  const [visibleDisabledWarningModal, setVisibleDisabledWarningModal] =
+    useState(false)
   return (
     <Drawer
       title={
-        <p className="heading-7 text-neutral-9">Chỉnh sửa trạng thái Đối tác</p>
+        <p className="heading-7 text-neutral-9">
+          Chỉnh sửa trạng thái bài viết
+        </p>
       }
       placement="right"
       width={640}
@@ -42,25 +32,62 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
               Hủy
             </Button>
             <Button type="primary" className="redButton" onClick={onClose}>
-              OK
+              Lưu
             </Button>
           </Space>
         </Row>
       }
     >
-      <DetailPartnerInfo />
       <div className="mt27">
         <Form layout="vertical">
+          <Form.Item name="id" label="Tiêu đề bài viết">
+            <Select></Select>
+          </Form.Item>
+          <Form.Item name="account" label="Người đăng">
+            <Select></Select>
+          </Form.Item>
+          <Form.Item name="email" label="Ngày đăng bài viết">
+            <DatePicker style={{ width: '100%' }} />
+          </Form.Item>
+
           <Form.Item name="status" label="Trạng thái">
-            <Select style={{ width: '100%' }} onChange={() => {}}>
-              <Select.Option value="1">Xác nhận</Select.Option>
-              <Select.Option value="2">Chưa xác nhận</Select.Option>
-              <Select.Option value="3">Khóa</Select.Option>
-              <Select.Option value="4">Xóa</Select.Option>
-            </Select>
+            <Radio.Group onChange={() => {}} value={1}>
+              <Radio value={1}>Hiển thị</Radio>
+              <Radio value={2}>Khóa</Radio>
+            </Radio.Group>
           </Form.Item>
         </Form>
       </div>
+
+      <Modal
+        title="Chỉnh sửa trạng thái bài viết"
+        visible={visibleDisabledWarningModal}
+        onOk={() => {
+          setVisibleDisabledWarningModal(false)
+        }}
+        onCancel={() => {
+          setVisibleDisabledWarningModal(false)
+        }}
+        footer={
+          <Row justify="end">
+            <Button
+              onClick={() => setVisibleDisabledWarningModal(false)}
+              className="button-1"
+            >
+              Hủy
+            </Button>
+            <Button
+              onClick={() => setVisibleDisabledWarningModal(false)}
+              type="primary"
+              className="redButton button-1"
+            >
+              Khóa
+            </Button>
+          </Row>
+        }
+      >
+        <p className="sub-title-1">Bạn chắc chắn muốn khóa bài viết này?</p>
+      </Modal>
     </Drawer>
   )
 }

@@ -1,4 +1,5 @@
 import { Drawer, Space, Button, Row, Form, Select } from 'antd'
+import { useState } from 'react'
 
 const DetailPartnerInfo = () => {
   return (
@@ -23,9 +24,30 @@ const DetailPartnerInfo = () => {
   )
 }
 
-const FormSelectUser = () => {}
+const FormSelectUser = () => {
+  return (
+    <Form layout="vertical">
+      <Form.Item name="id" label="Tên đăng ký">
+        <Select></Select>
+      </Form.Item>
+      <Form.Item name="account" label="Ngành kinh doanh">
+        <Select></Select>
+      </Form.Item>
+      <Form.Item name="email" label="Mặt hàng/ Dịch vụ chủ lực">
+        <Select></Select>
+      </Form.Item>
+      <Form.Item name="email" label="Mặt hàng/ Dịch vụ chủ lực">
+        <Select></Select>
+      </Form.Item>
+      <Form.Item name="email" label="Số đăng ký Doanh nghiệp">
+        <Select></Select>
+      </Form.Item>
+    </Form>
+  )
+}
 
 const EditPartnerInfoDrawer = ({ visible, onClose }) => {
+  const [partner, setPartner] = useState<any>({})
   return (
     <Drawer
       title={
@@ -48,7 +70,7 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
         </Row>
       }
     >
-      <DetailPartnerInfo />
+      {partner?.id ? <DetailPartnerInfo /> : <FormSelectUser />}
       <div className="mt27">
         <Form layout="vertical">
           <Form.Item name="status" label="Trạng thái">
@@ -56,7 +78,6 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
               <Select.Option value="1">Xác nhận</Select.Option>
               <Select.Option value="2">Chưa xác nhận</Select.Option>
               <Select.Option value="3">Khóa</Select.Option>
-              <Select.Option value="4">Xóa</Select.Option>
             </Select>
           </Form.Item>
         </Form>

@@ -4,8 +4,10 @@ import {
   UploadOutlined,
   SearchOutlined,
   DeleteOutlined,
+  PlusCircleOutlined,
+  PlusOutlined,
 } from '@ant-design/icons'
-import { Space, Table, Row, Select, Input, Col, Typography } from 'antd'
+import { Space, Table, Row, Select, Input, Col, Typography, Button } from 'antd'
 import { useState } from 'react'
 import {
   NumberParam,
@@ -15,6 +17,7 @@ import {
 } from 'use-query-params'
 import styles from './Draft.module.less'
 import EditNotificationDrawer from './EditNotificationDrawer'
+import AddNotification from './AddNotificatiton'
 
 const data = []
 for (let i = 0; i < 46; i++) {
@@ -48,6 +51,9 @@ const NotificationDraft = () => {
 
   const [visibleModalStatusPartner, setVisibleModalStatusPartner] =
     useState(false)
+
+  const [visibleModalAddPost, setVisibleModalAddPost] = useState(false)
+
   const columns = [
     {
       title: 'Tiêu đề thông cáo',
@@ -79,7 +85,19 @@ const NotificationDraft = () => {
   ]
   return (
     <div className={styles.container}>
-      <p className="heading-6">Danh sách Thông cáo truyền thông đã đăng</p>
+      <Row justify="space-between">
+        <p className="heading-6">Danh sách Thông cáo truyền thông đã đăng</p>
+        <Space>
+          <Button
+            onClick={() => setVisibleModalAddPost(true)}
+            icon={<PlusOutlined />}
+            className="redButton button-1"
+          >
+            Thêm
+          </Button>
+          <Button className="button-2">Xóa</Button>
+        </Space>
+      </Row>
 
       <div className="customContent mt16">
         <Row gutter={24} justify="space-between">
@@ -130,6 +148,13 @@ const NotificationDraft = () => {
         visible={visibleModalStatusPartner}
         onClose={() => {
           setVisibleModalStatusPartner(false)
+        }}
+      />
+
+      <AddNotification
+        visible={visibleModalAddPost}
+        onClose={() => {
+          setVisibleModalAddPost(false)
         }}
       />
     </div>

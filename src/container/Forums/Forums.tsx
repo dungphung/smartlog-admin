@@ -5,7 +5,7 @@ import {
   SearchOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Space, Table, Row, Select, Input, Col, Typography } from 'antd'
+import { Space, Table, Row, Select, Input, Col, Typography, Button } from 'antd'
 import { useState } from 'react'
 import {
   NumberParam,
@@ -72,7 +72,6 @@ const ListPartner = () => {
     useState(false)
   const columns = [
     {
-      title: 'Action',
       render: () => (
         <Space>
           <EditOutlined onClick={() => setVisibleModalStatusPartner(true)} />
@@ -142,9 +141,12 @@ const ListPartner = () => {
   ]
   return (
     <div className={styles.container}>
-      <p className="heading-6">Danh sách bài viết</p>
+      <Row justify="space-between">
+        <p className="heading-6">Danh sách bài viết</p>
+        <Button className="button-1 redButton">Đánh dấu spam</Button>
+      </Row>
 
-      <div className="customContent mt16">
+      <div className="customContent mt32">
         <Row gutter={24} justify="space-between">
           <Col xs={17}>
             <Input

@@ -25,11 +25,13 @@ const DetailPartnerInfo = () => {
 
 const FormSelectUser = () => {}
 
-const EditPartnerInfoDrawer = ({ visible, onClose }) => {
+const EditRequestCoopDrawer = ({ visible, onClose }) => {
   return (
     <Drawer
       title={
-        <p className="heading-7 text-neutral-9">Chỉnh sửa trạng thái Đối tác</p>
+        <p className="heading-7 text-neutral-9">
+          Chỉnh sửa trạng thái bài viết Tìm Cơ hội hợp tác
+        </p>
       }
       placement="right"
       width={640}
@@ -48,15 +50,13 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
         </Row>
       }
     >
-      <DetailPartnerInfo />
       <div className="mt27">
         <Form layout="vertical">
-          <Form.Item name="status" label="Trạng thái">
+          <Form.Item name="status" label="Thời gian hiển thị bài viết">
             <Select style={{ width: '100%' }} onChange={() => {}}>
-              <Select.Option value="1">Xác nhận</Select.Option>
-              <Select.Option value="2">Chưa xác nhận</Select.Option>
-              <Select.Option value="3">Khóa</Select.Option>
-              <Select.Option value="4">Xóa</Select.Option>
+              <Select.Option value="1">1 tháng</Select.Option>
+              <Select.Option value="2">3 tháng</Select.Option>
+              <Select.Option value="3">6 tháng</Select.Option>
             </Select>
           </Form.Item>
         </Form>
@@ -65,4 +65,4 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
   )
 }
 
-export default EditPartnerInfoDrawer
+export default EditRequestCoopDrawer

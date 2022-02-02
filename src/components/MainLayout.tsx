@@ -50,7 +50,7 @@ const navigation = [
       },
       {
         href: `/partners/${PARTNERS_TABS.LIST_REQUEST}`,
-        title: 'Danh sách yêu cầu',
+        title: 'Cơ hội hợp tác',
         key: `/partners/${PARTNERS_TABS.LIST_REQUEST}`,
       },
     ],
