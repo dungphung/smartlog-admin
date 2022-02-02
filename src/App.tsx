@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from 'react-router-dom'
 import NotFoundPage from 'src/pages/NotFoundPage'
-
+import vi_VN from 'antd/lib/locale/vi_VN'
 import { QueryParamProvider } from 'use-query-params'
 import HomePage from './pages/Home'
 import IntroPage from './pages/IntroPage'
@@ -24,6 +24,7 @@ import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import NotificationPage from './pages/NotificationPage'
 import Settings from './pages/Settings'
+import { ConfigProvider } from 'antd'
 const RouteAdapter = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -44,30 +45,32 @@ const RouteAdapter = ({ children }) => {
 
 function App() {
   return (
-    <BrowserRouter>
-      <QueryParamProvider ReactRouterRoute={RouteAdapter}>
-        <Routes>
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/analytics" element={<AnalyticsPage />} />
+    <ConfigProvider locale={vi_VN}>
+      <BrowserRouter>
+        <QueryParamProvider ReactRouterRoute={RouteAdapter}>
+          <Routes>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
 
-          <Route path="users/*" element={<UsersPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/lookup/*" element={<LookupPage />} />
-          <Route path="/forum" element={<ForumsPage />} />
+            <Route path="users/*" element={<UsersPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/lookup/*" element={<LookupPage />} />
+            <Route path="/forum" element={<ForumsPage />} />
 
-          <Route path="/setting/*" element={<Settings />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forget-password" element={<ForgetPasswordPage />} />
-          <Route path="/notification/*" element={<NotificationPage />} />
-          <Route path="/partners/*" element={<PartnersPage />} />
-          <Route path="/intro" element={<IntroPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/*" element={<NotFoundPage />} />
-        </Routes>
-      </QueryParamProvider>
-    </BrowserRouter>
+            <Route path="/setting/*" element={<Settings />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forget-password" element={<ForgetPasswordPage />} />
+            <Route path="/notification/*" element={<NotificationPage />} />
+            <Route path="/partners/*" element={<PartnersPage />} />
+            <Route path="/intro" element={<IntroPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/*" element={<NotFoundPage />} />
+          </Routes>
+        </QueryParamProvider>
+      </BrowserRouter>
+    </ConfigProvider>
   )
 }
 

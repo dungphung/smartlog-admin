@@ -45,11 +45,15 @@ const EditUserPermission = ({ visible, onClose }) => {
       footer={
         <Row justify="end">
           <Space>
-            <Button onClick={onClose} type="ghost">
+            <Button onClick={onClose} className="button-1" type="text">
               Hủy
             </Button>
-            <Button type="primary" className="redButton" onClick={onClose}>
-              OK
+            <Button
+              type="primary"
+              className="redButton button-1"
+              onClick={onClose}
+            >
+              Lưu
             </Button>
           </Space>
         </Row>
@@ -57,7 +61,7 @@ const EditUserPermission = ({ visible, onClose }) => {
     >
       <DetailInfoUser />
       <div className="mt27">
-        <Form layout="vertical">
+        <Form layout="vertical" size="large">
           <Form.Item name="status" label="Trạng thái">
             <Select style={{ width: '100%' }} onChange={() => {}}>
               <Select.Option value="1">Xác nhận</Select.Option>

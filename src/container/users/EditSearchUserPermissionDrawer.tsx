@@ -66,17 +66,17 @@ const EditUserPermission = ({ visible, onClose }) => {
       footer={
         <Row justify="end">
           <Space>
-            <Button onClick={onClose} type="ghost">
+            <Button onClick={onClose} type="text" className="button-1">
               Hủy
             </Button>
             <Button
               type="primary"
-              className="redButton"
+              className="redButton button-1"
               onClick={() => {
                 setVisibleWarningDisabledUser(true)
               }}
             >
-              OK
+              Lưu
             </Button>
           </Space>
         </Row>

@@ -1,4 +1,16 @@
-import { Avatar, Badge, Divider, Image, Layout, Menu, Row, Space } from 'antd'
+import {
+  Avatar,
+  Badge,
+  Button,
+  Divider,
+  Image,
+  Layout,
+  Menu,
+  Popover,
+  Row,
+  Space,
+  Typography,
+} from 'antd'
 import { useMemo, useState } from 'react'
 import Icon, {
   NotificationOutlined,
@@ -16,6 +28,8 @@ import NotificationLayoutIcon from 'src/assets/svgs/NotificationLayoutIcon'
 import SettingIcon from 'src/assets/svgs/SettingIcon'
 import BellIcon from 'src/assets/svgs/BellIcon'
 import styles from './MainLayout.module.less'
+import moment from 'moment'
+
 const { Header, Footer, Sider, Content } = Layout
 const { SubMenu } = Menu
 
@@ -147,6 +161,60 @@ const navigation = [
   },
 ]
 
+const NotificationButton = () => {
+  return (
+    <Popover
+      placement="bottom"
+      style={{ padding: 0 }}
+      content={
+        <div style={{ maxWidth: 450, maxHeight: 580 }}>
+          {[1, 2, 3, 4, 5].map((item) => {
+            return (
+              <div
+                className="user-notification"
+                key={item}
+                style={{ padding: '8px 12px' }}
+              >
+                <Typography.Paragraph
+                  className="sub-title-1 mb0 text-neutral-9"
+                  ellipsis={{
+                    rows: 2,
+                  }}
+                >
+                  Sự kiện Triển lãm Quốc tế về{' '}
+                  <strong>Công nghiệp Dược phẩm ở Hà Nội</strong> sắp diễn ra
+                  vào 06/01/2022 10:42...
+                </Typography.Paragraph>
+                <p className="caption-1 text-neutral-7">{moment().fromNow()}</p>
+              </div>
+            )
+          })}
+
+          {true && (
+            <Button
+              style={{
+                width: '100%',
+                height: 'auto',
+                background: '#F2F2F2',
+                borderColor: '#F2F2F2',
+              }}
+              className="button-see-all-notification "
+              onClick={() => {}}
+            >
+              <span className="sub-title-2">Xem tất cả thông báo</span>
+            </Button>
+          )}
+        </div>
+      }
+      trigger="hover"
+    >
+      <Badge dot>
+        <BellIcon />
+      </Badge>
+    </Popover>
+  )
+}
+
 const MainLayout: React.FC = ({ children }) => {
   const { pathname } = useLocation()
   const [collapsed, setCollapsed] = useState(false)
@@ -240,9 +308,7 @@ const MainLayout: React.FC = ({ children }) => {
                 <SearchOutlined style={{ fontSize: 20, marginTop: 5 }} />
               </div>
               <div className={styles.ml15} style={{ marginTop: 5 }}>
-                <Badge dot>
-                  <BellIcon />
-                </Badge>
+                <NotificationButton />
               </div>
 
               <div className={styles.ml15}>

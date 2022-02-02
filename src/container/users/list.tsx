@@ -4,7 +4,18 @@ import {
   SearchOutlined,
   UploadOutlined,
 } from '@ant-design/icons'
-import { Row, Space, Table, Tabs, Col, Input, Select, Form, Button } from 'antd'
+import {
+  Row,
+  Space,
+  Table,
+  Tabs,
+  Col,
+  Input,
+  Select,
+  Form,
+  Button,
+  Tag,
+} from 'antd'
 import { useMemo, useState, useCallback } from 'react'
 import {
   NumberParam,
@@ -18,22 +29,18 @@ import styles from './list.module.less'
 
 const STATUS_INFO = {
   '0': {
-    title: 'Active',
+    title: 'Xác nhận',
     color: '#00703C',
   },
   '1': {
-    title: 'Passive',
+    title: 'Chưa xác nhận',
     color: '#9DDAF4',
   },
   '2': {
-    title: 'Reopen',
-    color: '#FFB800',
-  },
-  '3': {
-    title: 'Block',
+    title: 'Khóa',
     color: '#D4351C',
   },
-  '4': {
+  '3': {
     title: 'Xóa',
     color: '#DBDBDB',
   },
@@ -44,7 +51,7 @@ for (let i = 0; i < 46; i++) {
   data.push({
     key: i,
     id: i + 1,
-    status: Math.floor(Math.random() * 5),
+    status: Math.floor(Math.random() * 4),
     account: 'Quyen Thai',
     email: 'quyen.thai@example.com',
     phone: '0938 545 272',
@@ -90,20 +97,16 @@ const ListRequest = () => {
       {
         title: 'Trạng thái',
         dataIndex: 'status',
-        width: '7%',
+
         render: (status, row) => {
           return (
-            <div
-              className="text-body-2 cursor"
-              style={{
-                background: STATUS_INFO[status].color,
-                color: 'white',
-                borderRadius: 2,
-                textAlign: 'center',
-                textDecoration: status === 4 ? 'line-through' : 'normal',
-              }}
-            >
-              {STATUS_INFO[status].title}
+            <div>
+              <Tag
+                className="text-body-2 cursor text-white"
+                color={STATUS_INFO[status].color}
+              >
+                {STATUS_INFO[status].title}
+              </Tag>
             </div>
           )
         },
@@ -119,6 +122,7 @@ const ListRequest = () => {
       {
         title: 'Ngày truy cập gần nhất',
         dataIndex: 'date',
+        width: 150,
       },
       {
         title: 'Ngày đăng ký',
@@ -144,7 +148,7 @@ const ListRequest = () => {
           <Row justify="end">
             <Button
               onClick={() => setVisibleSearchDrawer(true)}
-              className="redButton"
+              className="redButton button-1"
             >
               Chỉnh sửa
             </Button>
