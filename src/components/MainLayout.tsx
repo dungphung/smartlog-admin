@@ -14,7 +14,8 @@ import LookupIcon from 'src/assets/svgs/LookupIcon'
 import ForumIcon from 'src/assets/svgs/ForumIcon'
 import NotificationLayoutIcon from 'src/assets/svgs/NotificationLayoutIcon'
 import SettingIcon from 'src/assets/svgs/SettingIcon'
-
+import BellIcon from 'src/assets/svgs/BellIcon'
+import styles from './MainLayout.module.less'
 const { Header, Footer, Sider, Content } = Layout
 const { SubMenu } = Menu
 
@@ -25,12 +26,12 @@ const navigation = [
     icon: GroupUserIcon,
     children: [
       {
-        key: 'users/manager',
+        key: '/users/manager',
         title: 'Quản lý Người dùng',
         href: '/users/manager',
       },
       {
-        key: 'users/notification',
+        key: '/users/notification',
         title: 'Nhận tin tức và sự kiện',
         href: '/users/notification',
       },
@@ -113,7 +114,7 @@ const navigation = [
     icon: SettingIcon,
     children: [
       {
-        href: `setting/account`,
+        href: `/setting/account`,
         title: 'Tài khoản',
         key: `/setting/account`,
       },
@@ -149,6 +150,7 @@ const navigation = [
 const MainLayout: React.FC = ({ children }) => {
   const { pathname } = useLocation()
   const [collapsed, setCollapsed] = useState(false)
+  const [keys, setKeys] = useState([pathname])
   const navigate = useNavigate()
   const onCollapse = (collapsed: boolean) => {
     setCollapsed(collapsed)
@@ -160,77 +162,101 @@ const MainLayout: React.FC = ({ children }) => {
   //   const
   // }, [pathname])
 
+  const selectedKeys = useMemo(() => {
+    return [pathname]
+  }, [pathname])
+
+  console.log(keys)
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        style={{ background: 'white', borderRight: '1px solid #EBEBEB' }}
-        width={260}
-      >
-        <div className="logo">
-          <Image style={{ paddingLeft: 30 }} src="/svgs/Logo.svg" />
-        </div>
-        <Divider />
-        <Menu mode="inline" defaultOpenKeys={[pathname]}>
-          {navigation.map((item) => {
-            if (!item.children) {
+    <div className={styles.container}>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider className={styles.slideCustom} width={260}>
+          <div className="logo">
+            <Image
+              style={{ marginTop: 13 }}
+              preview={false}
+              src="/svgs/Logo.svg"
+            />
+          </div>
+
+          <div className={styles.infoAdmin}>
+            <p className={styles.name}>Quyen Thai</p>
+            <p className={styles.role}>admin</p>
+          </div>
+          <Divider />
+          <Menu
+            mode="inline"
+            defaultOpenKeys={[pathname]}
+            selectedKeys={selectedKeys}
+            openKeys={keys}
+            onOpenChange={(value) => setKeys(value)}
+          >
+            {navigation.map((item) => {
+              if (!item.children) {
+                return (
+                  <Menu.Item
+                    key={item.key}
+                    icon={<Icon component={item.icon} />}
+                    onClick={() => navigate(item.href)}
+                  >
+                    {item.title}
+                  </Menu.Item>
+                )
+              }
+
               return (
-                <Menu.Item
+                <SubMenu
                   key={item.key}
                   icon={<Icon component={item.icon} />}
-                  onClick={() => navigate(item.href)}
+                  title={item.title}
                 >
-                  {item.title}
-                </Menu.Item>
+                  {item.children?.map((child) => {
+                    return (
+                      <Menu.Item
+                        key={child.key}
+                        onClick={() => navigate(child.href)}
+                      >
+                        {child.title}
+                      </Menu.Item>
+                    )
+                  })}
+                </SubMenu>
               )
-            }
+            })}
+          </Menu>
+        </Sider>
+        <Layout className="site-layout" style={{ background: '#FAFAFA' }}>
+          <Header
+            className="site-layout-background"
+            style={{
+              padding: '0 30px',
+              background: 'white',
+              boxShadow: 'inset 0px -1px 0px #EBEBEB',
+            }}
+          >
+            <Row justify="end" align="middle">
+              <div>
+                <SearchOutlined style={{ fontSize: 20, marginTop: 5 }} />
+              </div>
+              <div className={styles.ml15} style={{ marginTop: 5 }}>
+                <Badge dot>
+                  <BellIcon />
+                </Badge>
+              </div>
 
-            return (
-              <SubMenu
-                key={item.key}
-                icon={<Icon component={item.icon} />}
-                title={item.title}
-              >
-                {item.children?.map((child) => {
-                  return (
-                    <Menu.Item
-                      key={child.key}
-                      onClick={() => navigate(child.href)}
-                    >
-                      {child.title}
-                    </Menu.Item>
-                  )
-                })}
-              </SubMenu>
-            )
-          })}
-        </Menu>
-      </Sider>
-      <Layout className="site-layout" style={{ background: '#FAFAFA' }}>
-        <Header
-          className="site-layout-background"
-          style={{
-            padding: '0 30px',
-            background: 'white',
-            boxShadow: 'inset 0px -1px 0px #EBEBEB',
-          }}
-        >
-          <Row justify="end">
-            <Space>
-              <SearchOutlined />
-              <Badge dot>
-                <NotificationOutlined />
-              </Badge>
-
-              <Avatar
-                style={{ backgroundColor: '#87d068' }}
-                icon={<UserOutlined />}
-              />
-            </Space>
-          </Row>
-        </Header>
-        <Content style={{ margin: '15px 30px' }}>{children}</Content>
+              <div className={styles.ml15}>
+                <Avatar
+                  style={{ backgroundColor: '#87d068' }}
+                  icon={<UserOutlined />}
+                />
+              </div>
+            </Row>
+          </Header>
+          <Content style={{ margin: '15px 30px' }}>{children}</Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </div>
   )
 }
 
