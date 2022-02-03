@@ -221,6 +221,34 @@ const NotificationButton = () => {
   )
 }
 
+const AccountPopover = () => {
+  return (
+    <Popover
+      placement="bottom"
+      style={{ padding: 0 }}
+      content={
+        <div style={{ maxWidth: 256, padding: 8 }}>
+          <div style={{ marginBottom: 8 }}>
+            <p className="sub-title-1 cursor">Thông tin tài khoản</p>
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <p className="sub-title-1 cursor">Hộp thư</p>
+          </div>
+          <div style={{ marginBottom: 8 }}>
+            <p className="sub-title-1 cursor">Cài đặt</p>
+          </div>
+          <div>
+            <p className="sub-title-1 cursor">Đăng xuất</p>
+          </div>
+        </div>
+      }
+      trigger="hover"
+    >
+      <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+    </Popover>
+  )
+}
+
 const MainLayout: React.FC = ({ children }) => {
   const { pathname } = useLocation()
   const [collapsed, setCollapsed] = useState(false)
@@ -317,10 +345,7 @@ const MainLayout: React.FC = ({ children }) => {
               </div>
 
               <div className={styles.ml15}>
-                <Avatar
-                  style={{ backgroundColor: '#87d068' }}
-                  icon={<UserOutlined />}
-                />
+                <AccountPopover />
               </div>
             </Row>
           </Header>
