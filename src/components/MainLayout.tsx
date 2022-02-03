@@ -84,16 +84,22 @@ const navigation = [
         title: 'Thông tin Cảng',
         key: `/lookup/${LOOKUP_NAVIGATION.PORT_INFORMATION}`,
       },
-      // {
-      //   href: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
-      //   title: 'Luật',
-      //   key: LOOKUP_NAVIGATION.RULES,
-      // },
-      // {
-      //   href: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
-      //   title: 'Các liên kết hữu ích',
-      //   key: LOOKUP_NAVIGATION.USEFUL_LINKS,
-      // },
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.LOGISTIC}`,
+        title: '3PL, dịch vụ',
+        key: `/lookup/${LOOKUP_NAVIGATION.LOGISTIC}`,
+      },
+
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
+        title: 'Luật',
+        key: `/lookup/${LOOKUP_NAVIGATION.RULES}`,
+      },
+      {
+        href: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
+        title: 'Các liên kết hữu ích',
+        key: `/lookup/${LOOKUP_NAVIGATION.USEFUL_LINKS}`,
+      },
     ],
   },
 

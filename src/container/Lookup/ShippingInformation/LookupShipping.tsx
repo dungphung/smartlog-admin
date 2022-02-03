@@ -18,13 +18,14 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-const LookupAirline = () => {
+const LookupPort = () => {
   const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
     pageSize: withDefault(NumberParam, 10),
     pageIndex: withDefault(NumberParam, 1),
     order: withDefault(StringParam, ''),
     keyword: withDefault(StringParam, ''),
   })
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const columns = [
     {
@@ -110,4 +111,4 @@ const LookupAirline = () => {
   )
 }
 
-export default LookupAirline
+export default LookupPort

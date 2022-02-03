@@ -1,27 +1,37 @@
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons'
 import { Space, Table } from 'antd'
 import { useState } from 'react'
+import {
+  NumberParam,
+  StringParam,
+  useQueryParams,
+  withDefault,
+} from 'use-query-params'
+import styles from './SeaPortInformation.module.less'
 
 const columns = [
   {
-    title: 'ID',
+    title: 'Tên Cảng',
     dataIndex: 'name',
   },
   {
-    title: 'Tài khoản',
+    title: 'Mã Cảng',
     dataIndex: 'age',
   },
   {
-    title: 'Nội dung bình luận',
+    title: 'Quốc gia',
     dataIndex: 'address',
   },
   {
-    title: 'Chủ đề bài viết',
+    title: 'Loại cảng',
     dataIndex: 'address',
   },
   {
-    title: 'Thời gian đăng',
+    title: 'Website',
     dataIndex: 'address',
+    render: (text) => {
+      return <span className={styles.websiteText}>{text}</span>
+    },
   },
 ]
 
@@ -35,23 +45,16 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-const ListComments = () => {
+const SeaPortInformation = () => {
+  const [{ pageIndex, pageSize }, setParams] = useQueryParams({
+    pageSize: withDefault(NumberParam, 10),
+    pageIndex: withDefault(NumberParam, 1),
+  })
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
-  return (
-    <div>
-      <p className="heading-6">Danh sách bình luận</p>
-      <div className="mt16">
-        <Space>
-          <UploadOutlined style={{ color: '#0b4582' }} />
-          <p className="button-2">IMPORT</p>
-        </Space>
-        <Space className="ml16">
-          <DownloadOutlined style={{ color: '#0b4582' }} />
-          <p className="button-2">Export</p>
-        </Space>
-      </div>
 
-      <div className="customContent mt16">
+  return (
+    <div className={styles.container}>
+      <div className="mt16">
         <Table
           rowSelection={{
             selectedRowKeys,
@@ -59,10 +62,17 @@ const ListComments = () => {
           }}
           columns={columns}
           dataSource={data}
+          pagination={{
+            pageSize,
+            current: pageIndex,
+            total: 85,
+            showSizeChanger: true,
+            showQuickJumper: true,
+          }}
         />
       </div>
     </div>
   )
 }
 
-export default ListComments
+export default SeaPortInformation
