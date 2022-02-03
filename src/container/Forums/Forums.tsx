@@ -5,8 +5,18 @@ import {
   SearchOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { Space, Table, Row, Select, Input, Col, Typography, Button } from 'antd'
-import { useState } from 'react'
+import {
+  Space,
+  Table,
+  Row,
+  Select,
+  Input,
+  Col,
+  Typography,
+  Button,
+  Tag,
+} from 'antd'
+import { useEffect, useState } from 'react'
 import {
   NumberParam,
   StringParam,
@@ -15,6 +25,8 @@ import {
 } from 'use-query-params'
 import styles from './Forums.module.less'
 import EditStatusPost from './EditStatusPost'
+import useForums from 'src/hooks/Forums/useForums'
+import moment from 'moment'
 const STATUS_INFO = {
   '0': {
     title: 'Active',
@@ -38,27 +50,6 @@ const STATUS_INFO = {
   },
 }
 
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Công ty Cổ phần Giải pháp Chuỗi cung ứng Smartlog ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-    status: Math.floor(Math.random() * 5),
-    email: 'quyen.thai@example.com',
-    field: 'Công nghệ thông tin',
-    mainServices: 'Vườn ươm và sản xuất hoa, Trồng nấm và rau',
-    registerNumber: '0316955888',
-    website: 'gosmartlog.com',
-    phone: '0938 545 272',
-    location: i % 2 === 0 ? 'Việt nam' : 'Úc',
-    type: i % 2 === 0 ? 'Xuất khẩu' : 'Nhập khẩu',
-    title:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and typesetting',
-  })
-}
-
 const ListPartner = () => {
   const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
     pageSize: withDefault(NumberParam, 10),
@@ -66,10 +57,21 @@ const ListPartner = () => {
     order: withDefault(StringParam, ''),
     keyword: withDefault(StringParam, ''),
   })
+
+  const { getData, isLoading, totalItem, data } = useForums()
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const [visibleModalStatusPartner, setVisibleModalStatusPartner] =
     useState(false)
+
+  useEffect(() => {
+    getData({
+      pageSize,
+      pageIndex,
+    })
+    return () => {}
+  }, [getData, pageSize, pageIndex])
+
   const columns = [
     {
       render: () => (
@@ -84,17 +86,13 @@ const ListPartner = () => {
       width: '7%',
       render: (status, row) => {
         return (
-          <div
-            className="text-body-2 cursor"
-            style={{
-              background: STATUS_INFO[status].color,
-              color: 'white',
-              borderRadius: 2,
-              textAlign: 'center',
-              textDecoration: status === 4 ? 'line-through' : 'normal',
-            }}
-          >
-            {STATUS_INFO[status].title}
+          <div>
+            <Tag
+              className="text-body-2 cursor text-white"
+              color={STATUS_INFO[status || 0].color}
+            >
+              {STATUS_INFO[status || 0].title}
+            </Tag>
           </div>
         )
       },
@@ -104,13 +102,18 @@ const ListPartner = () => {
       dataIndex: 'title',
       width: 400,
       render: (text) => (
-        <Typography.Paragraph ellipsis={{ rows: 3, expandable: false }}>
+        <Typography.Paragraph
+          className={styles.title}
+          ellipsis={{ rows: 3, expandable: false }}
+        >
           {text}
         </Typography.Paragraph>
       ),
     },
     {
       title: 'Danh mục',
+      dataIndex: 'category',
+      render: (category) => category?.name,
     },
     {
       title: 'Chủ đề',
@@ -122,15 +125,24 @@ const ListPartner = () => {
     },
     {
       title: 'Người tạo',
+      dataIndex: 'createdBy',
+      render: (createdBy) => createdBy || 'Admin',
     },
     {
       title: 'Thời gian tạo',
+      dataIndex: 'createdDate',
+      render: (createdDate) =>
+        moment(createdDate).format('DD/MM/YYYY mm:HH ZZ'),
     },
     {
       title: 'Lần chỉnh sửa cuối cùng',
+      dataIndex: 'updatedDate',
+      render: (updatedDate) =>
+        moment(updatedDate).format('DD/MM/YYYY mm:HH ZZ'),
     },
     {
       title: 'Lượt xem',
+      dataIndex: 'view',
     },
     {
       title: 'Lượt yêu thích',
@@ -174,6 +186,7 @@ const ListPartner = () => {
         </Row>
 
         <Table
+          loading={isLoading}
           className="mt32"
           scroll={{ x: 1800 }}
           rowSelection={{
@@ -182,12 +195,19 @@ const ListPartner = () => {
           }}
           columns={columns}
           dataSource={data}
+          rowKey={(row) => row.id}
           pagination={{
             pageSize,
             current: pageIndex,
-            total: 85,
+            total: totalItem,
             showSizeChanger: true,
             showQuickJumper: true,
+            onChange: (page, pageSize) => {
+              setParams({
+                pageIndex: page,
+                pageSize,
+              })
+            },
           }}
         />
       </div>

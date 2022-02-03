@@ -47,7 +47,6 @@ for (let i = 0; i < 46; i++) {
 const AboutUs = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const normFile = (e: any) => {
-    console.log('Upload event:', e)
     if (Array.isArray(e)) {
       return e
     }

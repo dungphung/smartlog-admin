@@ -1,12 +1,14 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Table } from 'antd'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import useShipping from 'src/hooks/Lookup/useShipping'
 import {
   NumberParam,
   StringParam,
   useQueryParams,
   withDefault,
 } from 'use-query-params'
+import styles from './Shipping.module.less'
 
 const data = []
 for (let i = 0; i < 46; i++) {
@@ -26,6 +28,18 @@ const LookupAirline = () => {
     keyword: withDefault(StringParam, ''),
   })
 
+  const { getData, data, totalItem, loading } = useShipping()
+
+  useEffect(() => {
+    const variables = {
+      pageSize,
+      pageIndex,
+      type: 'AIRPORT',
+    }
+
+    getData(variables)
+  }, [pageSize, pageIndex])
+
   const columns = [
     {
       title: '',
@@ -34,12 +48,13 @@ const LookupAirline = () => {
     {
       title: '',
       key: 'image',
-      render: () => {
-        return <img src="/images/demo-img.png" style={{ width: 70 }} />
+      dataIndex: 'image',
+      render: (src) => {
+        return <img src={src} style={{ width: 70 }} />
       },
     },
     {
-      title: 'Hãng tàu',
+      title: 'Hãng hàng không',
       dataIndex: 'name',
     },
 
@@ -92,18 +107,26 @@ const LookupAirline = () => {
   const onSelectChange = useCallback(() => {}, [])
 
   return (
-    <div>
+    <div className={styles.container}>
       <Table
+        loading={loading}
         expandable={{ expandedRowRender }}
         className="components-table-demo-nested mt32"
         columns={columns}
+        rowKey={(row) => row.id}
         dataSource={data}
         pagination={{
           pageSize,
           current: pageIndex,
-          total: 85,
+          total: totalItem,
           showSizeChanger: true,
           showQuickJumper: true,
+          onChange: (page, pageSize) => {
+            setParams({
+              pageIndex: page,
+              pageSize,
+            })
+          },
         }}
       />
     </div>

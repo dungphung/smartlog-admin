@@ -230,17 +230,9 @@ const MainLayout: React.FC = ({ children }) => {
     setCollapsed(collapsed)
   }
 
-  console.log(pathname)
-
-  // const keyName = useMemo(() => {
-  //   const
-  // }, [pathname])
-
   const selectedKeys = useMemo(() => {
     return [pathname]
   }, [pathname])
-
-  console.log(keys)
 
   return (
     <div className={styles.container}>

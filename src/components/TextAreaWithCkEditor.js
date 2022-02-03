@@ -39,11 +39,9 @@ const TextAreaWithCkEditor = ({ onSubmitData }) => {
       data="<p></p>"
       onReady={(editor) => {
         // You can store the "editor" and use when it is needed.
-        console.log('Editor is ready to use!', editor)
       }}
       onChange={(event, editor) => {
         const data = editor.getData()
-        console.log({ event, editor, data })
       }}
       onBlur={(event, editor) => {
         const data = editor.getData()
@@ -51,9 +49,7 @@ const TextAreaWithCkEditor = ({ onSubmitData }) => {
           onSubmitData(data)
         }
       }}
-      onFocus={(event, editor) => {
-        console.log('Focus.', editor)
-      }}
+      onFocus={(event, editor) => {}}
     />
   )
 }

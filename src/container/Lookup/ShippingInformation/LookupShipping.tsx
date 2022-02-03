@@ -1,22 +1,14 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Table } from 'antd'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import useShipping from 'src/hooks/Lookup/useShipping'
 import {
   NumberParam,
   StringParam,
   useQueryParams,
   withDefault,
 } from 'use-query-params'
-
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `PIL - Pacific International Lines ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  })
-}
+import styles from './Shipping.module.less'
 
 const LookupPort = () => {
   const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
@@ -27,6 +19,20 @@ const LookupPort = () => {
   })
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
+  const { getData, data, totalItem, loading } = useShipping()
+
+
+
+  useEffect(() => {
+    const variables = {
+      pageSize,
+      pageIndex,
+      type: 'SEAPORT',
+    }
+
+    getData(variables)
+  }, [pageSize, pageIndex])
+
   const columns = [
     {
       title: '',
@@ -35,8 +41,9 @@ const LookupPort = () => {
     {
       title: '',
       key: 'image',
-      render: () => {
-        return <img src="/images/demo-img.png" style={{ width: 70 }} />
+      dataIndex: 'image',
+      render: (src) => {
+        return <img src={src} style={{ width: 70 }} />
       },
     },
     {
@@ -93,18 +100,26 @@ const LookupPort = () => {
   const onSelectChange = useCallback(() => {}, [])
 
   return (
-    <div>
+    <div className={styles.container}>
       <Table
+        loading={loading}
         expandable={{ expandedRowRender }}
         className="components-table-demo-nested mt32"
         columns={columns}
+        rowKey={(row) => row.id}
         dataSource={data}
         pagination={{
           pageSize,
           current: pageIndex,
-          total: 85,
+          total: totalItem,
           showSizeChanger: true,
           showQuickJumper: true,
+          onChange: (page, pageSize) => {
+            setParams({
+              pageIndex: page,
+              pageSize,
+            })
+          },
         }}
       />
     </div>

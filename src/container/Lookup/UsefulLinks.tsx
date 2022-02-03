@@ -23,8 +23,6 @@ const UseFullLinks = () => {
     locationType: 'VIETNAM',
   })
 
-  console.log(data)
-
   const columns = [
     {
       title: '',
@@ -96,6 +94,7 @@ const UseFullLinks = () => {
           Danh sách các liên kết hữu ích
         </p>
         <Table
+          loading={loading}
           scroll={{ x: 2000 }}
           className="components-table-demo-nested mt32"
           columns={columns}

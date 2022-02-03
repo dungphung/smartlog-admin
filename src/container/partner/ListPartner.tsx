@@ -5,7 +5,7 @@ import {
   SearchOutlined,
 } from '@ant-design/icons'
 import { Space, Table, Row, Select, Input, Col, Tag, Button } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   NumberParam,
   StringParam,
@@ -15,6 +15,7 @@ import {
 import styles from './ListPartner.module.less'
 import EditPartnerInfoDrawer from './EditPartnerInfoDrawer'
 import EditPartnerWithSearchDrawer from './EditPartnerWithSearchDrawer'
+import usePartners from 'src/hooks/Partner/usePartners'
 
 const STATUS_INFO = {
   '0': {
@@ -30,23 +31,6 @@ const STATUS_INFO = {
     title: 'Ẩn',
     color: '#D4351C',
   },
-}
-
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Công ty Cổ phần Giải pháp Chuỗi cung ứng Smartlog ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-    status: Math.floor(Math.random() * 2),
-    email: 'quyen.thai@example.com',
-    field: 'Công nghệ thông tin',
-    mainServices: 'Giải pháp Chuỗi cung ứng',
-    registerNumber: '0316955888',
-    website: 'gosmartlog.com',
-    phone: '0938 545 272',
-  })
 }
 
 const ListPartner = () => {
@@ -65,6 +49,22 @@ const ListPartner = () => {
     setVisibleEditPartnerWithSearchDrawer,
   ] = useState(false)
 
+  const { data, loading, getPartnerListCompany, totalItem } = usePartners()
+
+
+
+  useEffect(() => {
+    getPartnerListCompany({
+      pageIndex,
+      pageSize,
+      keySearch: keyword,
+      filters: {},
+      orders: {},
+    })
+
+    return () => {}
+  }, [pageIndex, pageSize, keyword, getPartnerListCompany])
+
   const columns = [
     {
       title: '',
@@ -82,8 +82,8 @@ const ListPartner = () => {
       width: '10%',
       render: (status, row) => {
         return (
-          <Tag color={STATUS_INFO[status].color}>
-            {STATUS_INFO[status].title}
+          <Tag color={STATUS_INFO[status || 0].color}>
+            {STATUS_INFO[status || 0].title}
           </Tag>
         )
       },
@@ -171,6 +171,7 @@ const ListPartner = () => {
         </Row>
 
         <Table
+          loading={loading}
           className="mt32"
           scroll={{ x: 1800 }}
           rowSelection={{
@@ -182,9 +183,15 @@ const ListPartner = () => {
           pagination={{
             pageSize,
             current: pageIndex,
-            total: 85,
+            total: totalItem,
             showSizeChanger: true,
             showQuickJumper: true,
+            onChange: (page, pageSize) => {
+              setParams({
+                pageIndex: page,
+                pageSize,
+              })
+            },
           }}
         />
       </div>
