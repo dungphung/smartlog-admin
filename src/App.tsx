@@ -68,9 +68,8 @@ function App() {
               <Route path="/forget-password" element={<ForgetPasswordPage />} />
               <Route path="/notification/*" element={<NotificationPage />} />
               <Route path="/partners/*" element={<PartnersPage />} />
-              <Route path="/intro" element={<IntroPage />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/" element={<HomePage />} />
+
+              <Route path="/" element={<UsersPage />} />
               <Route path="/*" element={<NotFoundPage />} />
             </Routes>
           </QueryClientProvider>

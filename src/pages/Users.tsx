@@ -8,8 +8,11 @@ const Users = () => {
 
   return (
     <MainLayout>
-      {pathname.includes('manager') && <UserListContainer />}
-      {pathname.includes('notification') && <UserNotification />}
+      {pathname.includes('notification') ? (
+        <UserNotification />
+      ) : (
+        <UserListContainer />
+      )}
     </MainLayout>
   )
 }
