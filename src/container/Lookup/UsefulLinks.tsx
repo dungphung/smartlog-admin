@@ -8,9 +8,11 @@ import {
   useQueryParams,
   withDefault,
 } from 'use-query-params'
+import AddUsefulLinksModal from './AddUsefulLinksModal'
 import styles from './Rules.module.less'
 
 const UseFullLinks = () => {
+  const [visibleAddUsefulLinks, setVisibleAddUsefulLinks] = useState(false)
   const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
     pageSize: withDefault(NumberParam, 10),
     pageIndex: withDefault(NumberParam, 1),
@@ -65,7 +67,7 @@ const UseFullLinks = () => {
       render: () => {
         return (
           <Space size="middle">
-            <EditOutlined />
+            <EditOutlined onClick={() => setVisibleAddUsefulLinks(true)} />
             <DeleteOutlined style={{ color: '#D4351C' }} />
           </Space>
         )
@@ -81,7 +83,11 @@ const UseFullLinks = () => {
         <p className="heading-6">Các liên kết hữu ích</p>
 
         <Space>
-          <Button icon={<PlusOutlined />} className="redButton button-1">
+          <Button
+            onClick={() => setVisibleAddUsefulLinks(true)}
+            icon={<PlusOutlined />}
+            className="redButton button-1"
+          >
             Thêm
           </Button>
           <Button className="button-1" type="text">
@@ -109,6 +115,11 @@ const UseFullLinks = () => {
           }}
         />
       </div>
+
+      <AddUsefulLinksModal
+        visible={visibleAddUsefulLinks}
+        onCancel={() => setVisibleAddUsefulLinks(false)}
+      />
     </div>
   )
 }

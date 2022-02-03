@@ -15,10 +15,10 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
       footer={
         <Row justify="end">
           <Space>
-            <Button onClick={onClose} className="button-1" type="ghost">
+            <Button onClick={onClose} className="button-1" type="text">
               Hủy
             </Button>
-            <Button onClick={onClose} className="button-1" type="ghost">
+            <Button onClick={onClose} className="button-2" type="ghost">
               Lưu nháp
             </Button>
             <Button

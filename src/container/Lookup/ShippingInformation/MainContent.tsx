@@ -1,17 +1,26 @@
 import { Button, Row, Space, Tabs } from 'antd'
 import LookupAirline from './LookupAirline'
 import LookupShipping from './LookupShipping'
-
+import AddShippingModal from './AddShipping'
+import { useState } from 'react'
 const { TabPane } = Tabs
 
 const MainContent = () => {
+  const [visibleAddShippingModal, setVisibleAddShippingModal] = useState(false)
   return (
     <div>
       <Row justify="space-between">
         <p className="heading-6">Thông tin vận chuyển</p>
 
         <Space>
-          <Button className="redButton button-1">Thêm</Button>
+          <Button
+            className="redButton button-1"
+            onClick={() => {
+              setVisibleAddShippingModal(true)
+            }}
+          >
+            Thêm
+          </Button>
           <Button className="button-1" type="text">
             Xóa
           </Button>
@@ -37,6 +46,12 @@ const MainContent = () => {
           </TabPane>
         </Tabs>
       </div>
+      <AddShippingModal
+        visible={visibleAddShippingModal}
+        onCancel={() => {
+          setVisibleAddShippingModal(false)
+        }}
+      />
     </div>
   )
 }

@@ -8,9 +8,11 @@ import {
   useQueryParams,
   withDefault,
 } from 'use-query-params'
+import AddRulesModal from './AddRulesModal'
 import styles from './Rules.module.less'
 
 const Rules = () => {
+  const [visibleRuleModal, setVisibleRuleModal] = useState(false)
   const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
     pageSize: withDefault(NumberParam, 10),
     pageIndex: withDefault(NumberParam, 1),
@@ -56,7 +58,7 @@ const Rules = () => {
       render: () => {
         return (
           <Space size="middle">
-            <EditOutlined />
+            <EditOutlined onClick={() => setVisibleRuleModal(true)} />
             <DeleteOutlined style={{ color: '#D4351C' }} />
           </Space>
         )
@@ -72,7 +74,11 @@ const Rules = () => {
         <p className="heading-6">Tra cứu luật</p>
 
         <Space>
-          <Button icon={<PlusOutlined />} className="redButton button-1">
+          <Button
+            onClick={() => setVisibleRuleModal(true)}
+            icon={<PlusOutlined />}
+            className="redButton button-1"
+          >
             Thêm
           </Button>
           <Button className="button-1" type="text">
@@ -99,6 +105,11 @@ const Rules = () => {
           }}
         />
       </div>
+
+      <AddRulesModal
+        visible={visibleRuleModal}
+        onCancel={() => setVisibleRuleModal(false)}
+      />
     </div>
   )
 }

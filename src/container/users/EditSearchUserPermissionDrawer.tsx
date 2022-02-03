@@ -111,6 +111,7 @@ const EditUserPermission = ({ visible, onClose }) => {
             <Button
               onClick={() => setVisibleWarningDisabledUser(false)}
               className="button-1"
+              type="text"
             >
               Hủy
             </Button>
@@ -141,6 +142,7 @@ const EditUserPermission = ({ visible, onClose }) => {
             <Button
               onClick={() => setVisibleWarningChangeStatusUser(false)}
               className="button-1"
+              type="text"
             >
               Hủy
             </Button>

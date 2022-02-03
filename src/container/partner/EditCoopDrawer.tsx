@@ -40,17 +40,21 @@ const EditRequestCoopDrawer = ({ visible, onClose }) => {
       footer={
         <Row justify="end">
           <Space>
-            <Button onClick={onClose} type="ghost">
+            <Button onClick={onClose} className="button-1" type="text">
               Hủy
             </Button>
-            <Button type="primary" className="redButton" onClick={onClose}>
+            <Button
+              type="primary"
+              className="redButton button-1"
+              onClick={onClose}
+            >
               Lưu
             </Button>
           </Space>
         </Row>
       }
     >
-      <div className="mt27">
+      <div>
         <Form layout="vertical">
           <Form.Item name="status" label="Thời gian hiển thị bài viết">
             <Select style={{ width: '100%' }} onChange={() => {}}>

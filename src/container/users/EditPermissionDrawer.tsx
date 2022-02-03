@@ -1,4 +1,5 @@
-import { Drawer, Space, Button, Row, Form, Select } from 'antd'
+import { Drawer, Space, Button, Row, Form, Select, Modal } from 'antd'
+import { useState } from 'react'
 
 const DetailInfoUser = () => {
   return (
@@ -33,6 +34,12 @@ const DetailInfoUser = () => {
 const FormSelectUser = () => {}
 
 const EditUserPermission = ({ visible, onClose }) => {
+  const [visibleWarningDisabledUser, setVisibleWarningDisabledUser] =
+    useState(false)
+
+  const [visibleWarningChangeStatusUser, setVisibleWarningChangeStatusUser] =
+    useState(false)
+
   return (
     <Drawer
       title={
@@ -72,6 +79,71 @@ const EditUserPermission = ({ visible, onClose }) => {
           </Form.Item>
         </Form>
       </div>
+
+      <Modal
+        title="Chỉnh sửa quyền truy cập"
+        visible={visibleWarningDisabledUser}
+        onOk={() => {
+          setVisibleWarningDisabledUser(false)
+        }}
+        onCancel={() => {
+          setVisibleWarningDisabledUser(false)
+        }}
+        footer={
+          <Row justify="end">
+            <Button
+              onClick={() => setVisibleWarningDisabledUser(false)}
+              className="button-1"
+              type="text"
+            >
+              Hủy
+            </Button>
+            <Button
+              onClick={() => setVisibleWarningDisabledUser(false)}
+              type="primary"
+              className="redButton button-1"
+            >
+              Khóa
+            </Button>
+          </Row>
+        }
+      >
+        <p className="sub-title-1">Bạn chắc chắn muốn khóa người dùng này?</p>
+      </Modal>
+
+      <Modal
+        title="Chỉnh sửa quyền truy cập"
+        visible={visibleWarningChangeStatusUser}
+        onOk={() => {
+          setVisibleWarningDisabledUser(false)
+        }}
+        onCancel={() => {
+          setVisibleWarningChangeStatusUser(false)
+        }}
+        footer={
+          <Row justify="end">
+            <Button
+              onClick={() => setVisibleWarningChangeStatusUser(false)}
+              className="button-1"
+              type="text"
+            >
+              Hủy
+            </Button>
+            <Button
+              onClick={() => setVisibleWarningChangeStatusUser(false)}
+              type="primary"
+              className="redButton button-1"
+            >
+              Chuyển đổi
+            </Button>
+          </Row>
+        }
+      >
+        <p className="sub-title-1">
+          Bạn chắc chắn muốn chuyển quyền truy cập của người dùng này thành Xác
+          nhận?
+        </p>
+      </Modal>
     </Drawer>
   )
 }

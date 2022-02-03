@@ -47,12 +47,13 @@ const UserNotificationContainer = () => {
       </Row>
 
       <div className="mt32">
-        <Space className="ml16">
+        <Space>
           <DownloadOutlined style={{ color: '#0b4582' }} />
           <p className="button-2">Export</p>
         </Space>
       </div>
-      <div className="customContent mt32">
+      <div className="mt32" />
+      <div className="customContent ">
         <Tabs defaultActiveKey="1">
           <TabPane
             tab={

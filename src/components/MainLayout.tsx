@@ -292,7 +292,14 @@ const MainLayout: React.FC = ({ children }) => {
             })}
           </Menu>
         </Sider>
-        <Layout className="site-layout" style={{ background: '#FAFAFA' }}>
+        <Layout
+          className="site-layout"
+          style={{
+            background: '#FAFAFA',
+            overflow: 'hidden',
+            maxHeight: '100vh',
+          }}
+        >
           <Header
             className="site-layout-background"
             style={{
@@ -317,7 +324,14 @@ const MainLayout: React.FC = ({ children }) => {
               </div>
             </Row>
           </Header>
-          <Content style={{ margin: '15px 30px' }}>{children}</Content>
+          <Content
+            style={{
+              padding: '15px 30px',
+              overflow: 'auto',
+            }}
+          >
+            {children}
+          </Content>
         </Layout>
       </Layout>
     </div>

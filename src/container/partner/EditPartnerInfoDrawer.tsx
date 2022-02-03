@@ -1,23 +1,25 @@
 import { Drawer, Space, Button, Row, Form, Select } from 'antd'
 
-const DetailPartnerInfo = () => {
+const DetailPartnerInfo = ({ partner }) => {
+  console.log(partner)
+
   return (
     <div>
       <p className="sub-title-2 font-normal">
-        <span className="sub-title-2">Tên công ty:</span>Công ty Cổ phần Giải
-        pháp Chuỗi cung ứng Smartlog
+        <span className="sub-title-2">Tên công ty: </span>
+        {partner?.name}
       </p>
       <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Ngành kinh doanh:</span>Công nghệ thông
+        <span className="sub-title-2">Ngành kinh doanh: </span>Công nghệ thông
         tin
       </p>
       <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Mặt hàng/ Dịch vụ chủ lực:</span>Giải pháp
-        Chuỗi cung ứng
+        <span className="sub-title-2">Mặt hàng/ Dịch vụ chủ lực: </span>Giải
+        pháp Chuỗi cung ứng
       </p>
       <p className="sub-title-2 font-normal mt6">
-        <span className="sub-title-2">Số đăng ký Doanh nghiệp:</span>
-        0316955888 Smartlog
+        <span className="sub-title-2">Số đăng ký Doanh nghiệp: </span>
+        {partner?.taxNumber}
       </p>
     </div>
   )
@@ -25,7 +27,7 @@ const DetailPartnerInfo = () => {
 
 const FormSelectUser = () => {}
 
-const EditPartnerInfoDrawer = ({ visible, onClose }) => {
+const EditPartnerInfoDrawer = ({ visible, onClose, partnerSelected }) => {
   return (
     <Drawer
       title={
@@ -48,7 +50,7 @@ const EditPartnerInfoDrawer = ({ visible, onClose }) => {
         </Row>
       }
     >
-      <DetailPartnerInfo />
+      <DetailPartnerInfo partner={partnerSelected} />
       <div className="mt27">
         <Form layout="vertical">
           <Form.Item name="status" label="Trạng thái">

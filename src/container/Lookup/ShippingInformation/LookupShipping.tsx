@@ -8,10 +8,12 @@ import {
   useQueryParams,
   withDefault,
 } from 'use-query-params'
+import AddShipping from './AddShipping'
 import styles from './Shipping.module.less'
 
 const LookupPort = () => {
-  const [{ pageIndex, pageSize, order, keyword }, setParams] = useQueryParams({
+  const [visibleAddShippingModal, setVisibleAddShippingModal] = useState(false)
+  const [{ pageIndex, pageSize }, setParams] = useQueryParams({
     pageSize: withDefault(NumberParam, 10),
     pageIndex: withDefault(NumberParam, 1),
     order: withDefault(StringParam, ''),
@@ -20,8 +22,6 @@ const LookupPort = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const { getData, data, totalItem, loading } = useShipping()
-
-
 
   useEffect(() => {
     const variables = {
@@ -56,7 +56,11 @@ const LookupPort = () => {
       render: () => {
         return (
           <Space size="middle">
-            <EditOutlined />
+            <EditOutlined
+              onClick={() => {
+                setVisibleAddShippingModal(true)
+              }}
+            />
             <DeleteOutlined style={{ color: '#D4351C' }} />
           </Space>
         )
@@ -80,7 +84,6 @@ const LookupPort = () => {
         key: 'operation',
         render: () => (
           <Space size="middle">
-            <EditOutlined />
             <DeleteOutlined style={{ color: '#D4351C' }} />
           </Space>
         ),
@@ -103,6 +106,10 @@ const LookupPort = () => {
     <div className={styles.container}>
       <Table
         loading={loading}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (selectedRowKeys) => setSelectedRowKeys(selectedRowKeys),
+        }}
         expandable={{ expandedRowRender }}
         className="components-table-demo-nested mt32"
         columns={columns}
@@ -120,6 +127,13 @@ const LookupPort = () => {
               pageSize,
             })
           },
+        }}
+      />
+
+      <AddShipping
+        visible={visibleAddShippingModal}
+        onCancel={() => {
+          setVisibleAddShippingModal(false)
         }}
       />
     </div>

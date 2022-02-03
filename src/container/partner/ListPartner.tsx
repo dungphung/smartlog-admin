@@ -44,14 +44,15 @@ const ListPartner = () => {
 
   const [visibleModalStatusPartner, setVisibleModalStatusPartner] =
     useState(false)
+
+  const [selectedRow, setSelectedRow] = useState<any>(null)
+
   const [
     visibleEditPartnerWithSearchDrawer,
     setVisibleEditPartnerWithSearchDrawer,
   ] = useState(false)
 
   const { data, loading, getPartnerListCompany, totalItem } = usePartners()
-
-
 
   useEffect(() => {
     getPartnerListCompany({
@@ -69,10 +70,14 @@ const ListPartner = () => {
     {
       title: '',
       key: 'operation',
-
-      render: () => (
+      render: (item) => (
         <a>
-          <EditOutlined onClick={() => setVisibleModalStatusPartner(true)} />
+          <EditOutlined
+            onClick={() => {
+              setVisibleModalStatusPartner(true)
+              setSelectedRow(item)
+            }}
+          />
         </a>
       ),
     },
@@ -200,7 +205,9 @@ const ListPartner = () => {
         visible={visibleModalStatusPartner}
         onClose={() => {
           setVisibleModalStatusPartner(false)
+          setSelectedRow(null)
         }}
+        partnerSelected={selectedRow}
       />
 
       <EditPartnerWithSearchDrawer

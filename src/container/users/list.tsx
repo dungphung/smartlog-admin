@@ -156,13 +156,14 @@ const ListRequest = () => {
         </Col>
       </Row>
 
-      <div className="mt16">
-        <Space className="ml16">
+      <div className="mt32">
+        <Space>
           <DownloadOutlined style={{ color: '#0b4582' }} />
           <p className="button-2">Export</p>
         </Space>
       </div>
-      <div className="customContent mt16">
+      <div className="mt32" />
+      <div className="customContent">
         <Row gutter={24} justify="space-between">
           <Col xs={17}>
             <Input

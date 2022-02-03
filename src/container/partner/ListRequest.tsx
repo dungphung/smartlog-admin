@@ -145,7 +145,7 @@ const ListPartner = () => {
       render: () => (
         <Space>
           <EditOutlined onClick={() => setVisibleModalStatusPartner(true)} />
-          <DeleteOutlined />
+          <DeleteOutlined style={{ color: '#D4351C' }} />
         </Space>
       ),
     },
