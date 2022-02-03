@@ -6,11 +6,13 @@ import AccountInfo from 'src/container/Setting/AccountInfo'
 import Policy from 'src/container/Setting/Policy'
 import FooterContainer from 'src/container/Setting/Footer'
 import IntroContainer from 'src/container/Setting/Intro'
+import Email from 'src/container/Setting/Email'
 const Settings = () => {
   const { pathname } = useLocation()
   return (
     <MainLayout>
       {pathname.includes('account') && <AccountInfo />}
+      {pathname.includes('email') && <Email />}
       {pathname.includes('contact') && <ContactContainer />}
       {pathname.includes('policy') && <Policy />}
       {pathname.includes('footer') && <FooterContainer />}
